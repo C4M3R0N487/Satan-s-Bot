@@ -1,0 +1,63 @@
+from discord.ext import tasks, commands
+import requests
+
+class HeartbeatHelper(commands.Cog):
+  def __init__(self, bot):
+    self.bot = bot
+    self.hb_delay = 60.0
+    self.heartbeat.start()
+
+  def cog_unload(self):
+    self.heartbeat.cancel
+
+  @tasks.loop(seconds=60.0)
+  async def heartbeat(self):
+    print('starting heartbeat')
+    response = requests.get('google.com')
+    if response:
+      print('Got response from google.com')
+    else:
+      print('Couldn\'t get a response during heartbeat!')
+
+  @heartbeat.before_loop
+  async def before_heartbeat(self):
+    print('waiting for startup...')
+    await self.bot.wait_until_ready()
+    print('waiting finished! Ready to go!')
+
+  def check_is_author_owner():
+    def predicate(ctx):
+      if ctx.message.author.id in ctx.bot.botOwners:
+        return True
+      raise ctx.bot.get_cog('CommandErrorHandler').OwnerError
+    return commands.check(predicate)
+
+  @commands.command(name='chb', hidden=True)
+  @check_is_author_owner()
+  async def _change_heartbeat(self, ctx, arg=None):
+    """Updates the delay between heartbeat/keepalive beats"""
+
+    if arg is None:
+      await ctx.send('Please provide an argument! (in number of seconds)')
+    self.hb_delay = float(arg)
+    self.heartbeat.change_interval(seconds=self.hb_delay)
+
+  @commands.command(name='stophb', hidden=True)
+  @check_is_author_owner()
+  async def _stop_heartbeat(self, ctx, arg=None):
+    """Cancels the heartbeat/keepalive beats"""
+    self.heartbeat.cancel()
+
+  @commands.command(name='starthb', hidden=True)
+  @check_is_author_owner()
+  async def _start_heartbeat(self, ctx, arg=None):
+    """Startss the heartbeat/keepalive beats"""
+    self.heartbeat.start()
+
+  @_start_heartbeat.error
+  async def start_error(self, ctx, error):
+    if isinstance(error, RuntimeError):
+      await ctx.send('Heartbeat is already running!')
+
+def setup(bot):
+  bot.add_cog(HeartbeatHelper(bot))
