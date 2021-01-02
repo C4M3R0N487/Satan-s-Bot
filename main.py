@@ -3,7 +3,7 @@ import os
 import json
 from discord.ext import commands
 from pretty_help import PrettyHelp
-from .secrets.py import TOKEN
+from ./.secrets.py import TOKEN
 
 description = 'The KMLegion\'s own discord bot! Currently under construction!'
 commandChar = "%"
