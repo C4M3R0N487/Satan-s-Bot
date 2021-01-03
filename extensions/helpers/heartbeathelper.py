@@ -37,13 +37,14 @@ class HeartbeatHelper(commands.Cog):
       await ctx.send('Please provide an argument! (in number of seconds)')
     self.hb_delay = float(arg)
     self.heartbeat.change_interval(seconds=self.hb_delay)
+    await ctx.send('Heartbeat interval changed.')
 
   @commands.command(name='stophb', hidden=True)
   @check_is_author_owner()
   async def _stop_heartbeat(self, ctx, arg=None):
     """Cancels the heartbeat/keepalive beats"""
     self.heartbeat.cancel()
-    await ctx.send('Heartbeat cancelled.')
+    await ctx.send('Heartbeat stopped.')
 
   @commands.command(name='starthb', hidden=True)
   @check_is_author_owner()
