@@ -27,3 +27,11 @@ def get_quote():
           await msg.author.remove_roles(pending)
           await msg.author.add_roles(approved)
           await msg.channel.send('You\'ve been approved!')
+
+
+
+response = await requests.get('google.com')
+if response:
+  print('Got response from google.com')
+else:
+  print('Couldn\'t get a response during heartbeat!')

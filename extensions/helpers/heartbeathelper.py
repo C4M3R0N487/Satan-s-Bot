@@ -4,20 +4,16 @@ import requests
 class HeartbeatHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.hb_delay = 300.0
+    self.hb_delay = 30.0
     self.heartbeat.start()
 
   def cog_unload(self):
     self.heartbeat.cancel
 
-  @tasks.loop(seconds=300.0)
+  @tasks.loop(seconds=30.0)
   async def heartbeat(self):
-    print('starting heartbeat')
-    response = await requests.get('google.com')
-    if response:
-      print('Got response from google.com')
-    else:
-      print('Couldn\'t get a response during heartbeat!')
+    print('Heartbeat started!')
+
 
   @heartbeat.before_loop
   async def before_heartbeat(self):
@@ -47,12 +43,14 @@ class HeartbeatHelper(commands.Cog):
   async def _stop_heartbeat(self, ctx, arg=None):
     """Cancels the heartbeat/keepalive beats"""
     self.heartbeat.cancel()
+    await ctx.send('Heartbeat cancelled.')
 
   @commands.command(name='starthb', hidden=True)
   @check_is_author_owner()
   async def _start_heartbeat(self, ctx, arg=None):
     """Startss the heartbeat/keepalive beats"""
     self.heartbeat.start()
+    await ctx.send('Heartbeat starting...')
 
   @_start_heartbeat.error
   async def start_error(self, ctx, error):
