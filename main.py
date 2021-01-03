@@ -3,7 +3,6 @@ import os
 import json
 from discord.ext import commands
 from pretty_help import PrettyHelp
-from secrets import TOKEN
 
 description = 'The KMLegion\'s own discord bot! Currently under construction!'
 commandChar = "%"
@@ -25,4 +24,4 @@ bot.load_extension('extensions.helpers.errorhelper')
 bot.load_extension('extensions.helpers.datahelper')
 bot.load_extension('extensions.helpers.heartbeathelper')
 
-bot.run(TOKEN)
+bot.run(os.environ['BOT_TOKEN'])
