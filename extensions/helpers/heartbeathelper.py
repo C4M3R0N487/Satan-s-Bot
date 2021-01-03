@@ -4,13 +4,13 @@ import requests
 class HeartbeatHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.hb_delay = 60.0
+    self.hb_delay = 300.0
     self.heartbeat.start()
 
   def cog_unload(self):
     self.heartbeat.cancel
 
-  @tasks.loop(seconds=60.0)
+  @tasks.loop(seconds=300.0)
   async def heartbeat(self):
     print('starting heartbeat')
     response = requests.get('google.com')

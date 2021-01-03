@@ -23,6 +23,6 @@ bot.load_extension('extensions.utils')
 bot.load_extension('extensions.moderator')
 bot.load_extension('extensions.helpers.errorhelper')
 bot.load_extension('extensions.helpers.datahelper')
-#bot.load_extension('extensions.helpers.heartbeathelper')
+bot.load_extension('extensions.helpers.heartbeathelper')
 
 bot.run(TOKEN)
