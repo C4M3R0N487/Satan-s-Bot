@@ -7,7 +7,7 @@ class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
 
-    p = Path('./.responses.json')
+    p = Path('/home/kira/kml/KMLegion-Bot/responses.json')
     with p.open() as file:
       response_data = json.load(file)
     self.bot.responses = response_data
