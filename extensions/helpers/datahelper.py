@@ -9,7 +9,8 @@ import motor.motor_asyncio
 class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    dburi = "mongodb://%s:%s@localhost:27017" % (quote_plus("AdminKira"), quote_plus(os.environ['DB_TOKEN']))
+    dbkey = os.environ['DB_TOKEN']
+    dburi = "mongodb://%s:%s@localhost:27017" % (quote_plus("AdminKira"), quote_plus(dbkey))
     self.mongo = motor.motor_asyncio.AsyncIOMotorClient(dburi)
 
     p = Path('/home/kira/kml/KMLegion-Bot/responses.json')
