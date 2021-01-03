@@ -13,7 +13,7 @@ class HeartbeatHelper(commands.Cog):
   @tasks.loop(seconds=300.0)
   async def heartbeat(self):
     print('starting heartbeat')
-    response = requests.get('google.com')
+    response = await requests.get('google.com')
     if response:
       print('Got response from google.com')
     else:
