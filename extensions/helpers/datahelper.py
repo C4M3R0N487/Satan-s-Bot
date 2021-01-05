@@ -6,8 +6,8 @@ import json
 import config
 import motor.motor_asyncio
 import keyring
-import keyring_jeepney
-keyring.set_keyring(keyring_jeepney.Keyring())
+#import keyring_jeepney
+#keyring.set_keyring(keyring_jeepney.Keyring())
 
 class DataHelper(commands.Cog):
   def __init__(self, bot):

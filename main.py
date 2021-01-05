@@ -4,8 +4,8 @@ import json
 from discord.ext import commands
 from pretty_help import PrettyHelp
 import keyring
-import keyring_jeepney
-keyring.set_keyring(keyring_jeepney.Keyring())
+#import keyring_jeepney
+#keyring.set_keyring(keyring_jeepney.Keyring())
 
 description = 'The KMLegion\'s own discord bot! Currently under construction!'
 commandChar = "%"
