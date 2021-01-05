@@ -5,16 +5,14 @@ import os
 import json
 import config
 import motor.motor_asyncio
-import keyring
+#import keyring
 #import keyring_jeepney
 #keyring.set_keyring(keyring_jeepney.Keyring())
 
 class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    dbkey = keyring.get_password("system", "AdminKira")
-    dburi = "mongodb://AdminKira:" + quote_plus(bytes(dbkey)) + "@localhost:27017"
-    del dbkey
+    dburi = "mongodb://AdminKira:" + quote_plus(bytes(os.environ.get('DB_TOKEN'))) + "@localhost:27017"
     self.mongo = motor.motor_asyncio.AsyncIOMotorClient(dburi)
 
     p = Path('/home/kira/kml/KMLegion-Bot/responses.json')
