@@ -3,6 +3,9 @@ import os
 import json
 from discord.ext import commands
 from pretty_help import PrettyHelp
+import keyring
+import keyring_jeepney
+keyring.set_keyring(keyring_jeepney.Keyring())
 
 description = 'The KMLegion\'s own discord bot! Currently under construction!'
 commandChar = "%"
@@ -24,4 +27,4 @@ bot.load_extension('extensions.helpers.errorhelper')
 bot.load_extension('extensions.helpers.datahelper')
 bot.load_extension('extensions.helpers.heartbeathelper')
 
-bot.run(str(os.environ.get('BOT_TOKEN')))
+bot.run(keyring.get_password("system", "bot_token"))
