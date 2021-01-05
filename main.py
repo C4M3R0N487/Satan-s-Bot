@@ -24,4 +24,4 @@ bot.load_extension('extensions.helpers.errorhelper')
 bot.load_extension('extensions.helpers.datahelper')
 bot.load_extension('extensions.helpers.heartbeathelper')
 
-bot.run(os.environ['BOT_TOKEN'])
+bot.run(os.environ.get('BOT_TOKEN'))

@@ -9,7 +9,7 @@ import motor.motor_asyncio
 class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    dbkey = os.environ['DB_TOKEN']
+    dbkey = os.environ.get('DB_TOKEN')
     dburi = "mongodb://%s:%s@localhost:27017" % (quote_plus("AdminKira"), quote_plus(dbkey))
     self.mongo = motor.motor_asyncio.AsyncIOMotorClient(dburi)
 
