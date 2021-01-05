@@ -13,7 +13,7 @@ class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
     dbkey = keyring.get_password("system", "AdminKira")
-    dburi = "mongodb://AdminKira:" + quote_plus(dbkey) + "@localhost:27017"
+    dburi = "mongodb://AdminKira:" + quote_plus(bytes(dbkey)) + "@localhost:27017"
     del dbkey
     self.mongo = motor.motor_asyncio.AsyncIOMotorClient(dburi)
 
