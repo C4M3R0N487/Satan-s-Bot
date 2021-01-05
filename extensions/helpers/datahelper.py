@@ -12,7 +12,9 @@ import keyring
 class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    dburi = "mongodb://AdminKira:" + quote_plus(bytes(keyring.get_password("system", "AdminKira"))) + "@localhost:27017"
+    dbkey = keyring.get_password("system", "AdminKira")
+    dburi = "mongodb://AdminKira:" + quote_plus(dbkey) + "@localhost:27017"
+    del dbkey
     self.mongo = motor.motor_asyncio.AsyncIOMotorClient(dburi)
 
     p = Path('/home/kira/kml/KMLegion-Bot/responses.json')
