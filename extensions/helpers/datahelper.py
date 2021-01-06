@@ -1,10 +1,12 @@
 from discord.ext import commands
 from pathlib import Path
 from urllib.parse import quote_plus
+from dotenv import load_dotenv
 import os
 import json
 import config
 import motor.motor_asyncio
+load_dotenv()
 #import keyring
 #import keyring_jeepney
 #keyring.set_keyring(keyring_jeepney.Keyring())
@@ -12,7 +14,9 @@ import motor.motor_asyncio
 class DataHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    dburi = "mongodb://AdminKira:" + quote_plus(bytes(os.environ.get('DB_TOKEN'))) + "@localhost:27017"
+    dbkey = os.environ.get('DB_TOKEN')
+    dburi = "mongodb://AdminKira:" + quote_plus(bytes(dbkey)) + "@localhost:27017"
+    del dbkey
     self.mongo = motor.motor_asyncio.AsyncIOMotorClient(dburi)
 
     p = Path('/home/kira/kml/KMLegion-Bot/responses.json')

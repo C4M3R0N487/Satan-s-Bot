@@ -3,6 +3,8 @@ import os
 import json
 from discord.ext import commands
 from pretty_help import PrettyHelp
+from dotenv import load_dotenv
+load_dotenv()
 #import keyring
 #import keyring_jeepney
 #keyring.set_keyring(keyring_jeepney.Keyring())
