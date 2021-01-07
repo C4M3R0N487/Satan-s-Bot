@@ -17,9 +17,9 @@ class Retriever(commands.Cog):
   @commands.check(channel_is_porn_enabled)
   async def _rg_search(self, ctx, arg=None):
     """Returns a random gif from redgif based on search terms.
-    
+
     Arguments:
-        
+
     """
     numResults = 50
     if arg is None:
@@ -38,7 +38,7 @@ class Retriever(commands.Cog):
         ran = len(gfycats)
       else:
         ran = numResults
-      
+
       while(True):
         selector = randrange(ran)
         selection = gfycats[selector]
@@ -49,6 +49,8 @@ class Retriever(commands.Cog):
 
         #selection = choice(gfycats)
         #print(selection)
+        if not selection['nsfw']:
+            continue
         if 'max5mbGif' in selection:
           url = selection['max5mbGif']
           break
