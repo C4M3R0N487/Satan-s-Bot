@@ -129,7 +129,7 @@ class Retriever(commands.Cog):
 
   @_send_nudes.error
   async def sendgif_error(self, ctx, error):
-    if isinstance(error, commands.TooManyARguments):
+    if isinstance(error, commands.TooManyArguments):
         await ctx.send('Too many arguments! Format is: %sendgif [@user] [search term] -> Enclose multiple terms in quotes!')
 
 
