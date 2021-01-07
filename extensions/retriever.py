@@ -49,7 +49,7 @@ class Retriever(commands.Cog):
 
         #selection = choice(gfycats)
         print(selection)
-        if selection['nsfw'] == "0":
+        if selection['nsfw'] == "0" | None:
             continue
         if 'max5mbGif' in selection:
           url = selection['max5mbGif']
