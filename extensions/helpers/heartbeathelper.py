@@ -62,7 +62,7 @@ class HeartbeatHelper(commands.Cog):
 
   async def _check_sync(self):
     gmt = time.gmtime()
-    if gmt['tm_min'] != 0 | 30:
+    if gmt[4] != 0 | 30:
       print('Time out of sync')
     else:
       print('Time in sync')
