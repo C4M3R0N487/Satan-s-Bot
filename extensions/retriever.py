@@ -1,4 +1,5 @@
 from discord.ext import commands
+import discord
 import requests
 from urllib.parse import quote_plus
 from random import randrange
@@ -65,6 +66,55 @@ class Retriever(commands.Cog):
       print(url)
       await ctx.send(url)
 
+  @commands.command(name='sendgif')
+  async def _send_nudes(self, ctx, target: discord.Member, query):
+    await self._rg_search(ctx, query)
+    numResults = 150
+
+    if query is None:
+      await ctx.send('Please provide a search term, or multiple terms enclosed in quotes.')
+      return
+
+    response = requests.get('https://api.redgifs.com/v1/gfycats/search?search_text=' + quote_plus(arg) + '&count=' + str(numResults) + '&start=0')
+
+    json_data = response.json()
+    gfycats = json_data['gfycats']
+
+    if len(gfycats) < 1:
+      await ctx.send(ctx.bot.responses['NoGifsFound'])
+    else:
+      if numResults > len(gfycats):
+        ran = len(gfycats)
+      else:
+        ran = numResults
+
+      while(True):
+        selector = randrange(ran)
+        selection = gfycats[selector]
+        """while "max5mbGif" not in selection:
+          selector = randrange(ran)
+          print(selector)
+          selection = gfycats[selector]"""
+
+        #selection = choice(gfycats)
+        #print(selection)
+        if 'max5mbGif' in selection:
+          url = selection['max5mbGif']
+          break
+        elif 'max2mbGif' in selection:
+          url = selection['max2mbGif']
+          break
+        elif 'mobileUrl' in selection:
+          url = selection['mobileUrl']
+          break
+        elif 'max1mbGif' in selection:
+          url = selection['max1mbGif']
+          break
+        else: continue
+      print(url)
+      await target.send(url)
+
+
   @commands.command(name='quote')
   async def _quote(self, ctx):
     response = requests.get('https://zenquotes.io/api/random')
@@ -76,6 +126,11 @@ class Retriever(commands.Cog):
   async def redgif_error(self, ctx, error):
     if isinstance(error, commands.CheckFailure):
       await ctx.send(ctx.bot.responses['NotAPornChannel'])
+
+  @_send_nudes.error
+  async def sendgif_error(self, ctx, error):
+    if isinstance(error, commands.TooManyARguments):
+        await ctx.send('Too many arguments! Format is: %sendgif [@user] [search term] -> Enclose multiple terms in quotes!')
 
 
 def setup(bot):
