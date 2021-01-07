@@ -21,7 +21,7 @@ class Retriever(commands.Cog):
     Arguments:
 
     """
-    numResults = 50
+    numResults = 150
     if arg is None:
       await ctx.send(ctx.bot.responses['SearchArgs'])
       return
