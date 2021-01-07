@@ -67,7 +67,7 @@ class Retriever(commands.Cog):
       await ctx.send(url)
 
   @commands.command(name='sendgif')
-  async def _send_nudes(self, ctx, target: discord.Member, query):
+  async def _send_nudes(self, ctx, tgt, query):
     numResults = 150
     print(target)
     if query is None:
@@ -111,7 +111,7 @@ class Retriever(commands.Cog):
           break
         else: continue
       print(url)
-      await target.send(url)
+      await ctx.message.mentions[0].send(url)
 
 
   @commands.command(name='quote')
