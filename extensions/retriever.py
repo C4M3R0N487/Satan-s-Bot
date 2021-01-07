@@ -76,7 +76,7 @@ class Retriever(commands.Cog):
       await ctx.send('Please provide a search term, or multiple terms enclosed in quotes.')
       return
 
-    response = requests.get('https://api.redgifs.com/v1/gfycats/search?search_text=' + quote_plus(arg) + '&count=' + str(numResults) + '&start=0')
+    response = requests.get('https://api.redgifs.com/v1/gfycats/search?search_text=' + quote_plus(query) + '&count=' + str(numResults) + '&start=0')
 
     json_data = response.json()
     gfycats = json_data['gfycats']
