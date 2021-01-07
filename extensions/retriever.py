@@ -69,6 +69,7 @@ class Retriever(commands.Cog):
   @commands.command(name='sendgif')
   async def _send_nudes(self, ctx, tgt, query):
     numResults = 150
+    target = ctx.message.mentions[0]
     print(ctx.message.mentions[0])
     print(query)
     if query is None:
@@ -112,7 +113,7 @@ class Retriever(commands.Cog):
           break
         else: continue
       print(url)
-      await ctx.message.mentions[0].send(url)
+      await target.send(url)
 
 
   @commands.command(name='quote')
