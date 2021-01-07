@@ -63,7 +63,7 @@ class HeartbeatHelper(commands.Cog):
       await ctx.send('Heartbeat is already running!')
 
   async def _check_sync(self):
-      response = await c.request('uk.pool.ntp.org')
+      response = await self.ntp.request('uk.pool.ntp.org')
       print(ctime(response.tx_time))
 
 def setup(bot):
