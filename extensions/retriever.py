@@ -114,6 +114,7 @@ class Retriever(commands.Cog):
         else: continue
       print(url)
       await target.send(url)
+      await ctx.send('Sent: ' + url)
 
 
   @commands.command(name='quote')
