@@ -68,7 +68,6 @@ class Retriever(commands.Cog):
 
   @commands.command(name='sendgif')
   async def _send_nudes(self, ctx, target: discord.Member, query):
-    await self._rg_search(ctx, query)
     numResults = 150
 
     if query is None:
