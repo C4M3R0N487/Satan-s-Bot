@@ -35,6 +35,14 @@ class Utils(commands.Cog):
     else:
       await ctx.send('Extension not found.')
 
+  @commands.command(name='dm')
+  @check_is_author_owner()
+  async def _dm_user(self, ctx, tgt, msg):
+    """Takes a peek at a part of the server.
+    currently available: channel, channelid"""
+    target = ctx.message.mentions[0]
+    await target.send(msg)
+
   @commands.command(name='echo')
   @check_is_author_owner()
   async def _echo(self, ctx, arg1: discord.TextChannel, arg2):

@@ -70,6 +70,7 @@ class Retriever(commands.Cog):
   async def _send_nudes(self, ctx, tgt, query):
     numResults = 150
     print(ctx.message.mentions[0])
+    print(query)
     if query is None:
       await ctx.send('Please provide a search term, or multiple terms enclosed in quotes.')
       return
