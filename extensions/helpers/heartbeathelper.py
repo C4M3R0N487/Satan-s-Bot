@@ -1,18 +1,22 @@
 from discord.ext import tasks, commands
+from time import ctime
 import requests
+import ntplib
 
 class HeartbeatHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
+    self.ntp = ntplib.NTPClient()
     self.hb_delay = 30.0
     self.heartbeat.start()
 
   def cog_unload(self):
     self.heartbeat.cancel
 
-  @tasks.loop(seconds=30.0)
+  @tasks.loop(minutes=30.0)
   async def heartbeat(self):
-    print('Heartbeat started!')
+    print('Heartbeat!')
+    await self._check_sync()
 
 
   @heartbeat.before_loop
@@ -34,7 +38,7 @@ class HeartbeatHelper(commands.Cog):
     """Updates the delay between heartbeat/keepalive beats"""
 
     if arg is None:
-      await ctx.send('Please provide an argument! (in number of seconds)')
+      await ctx.send('Please provide an argument! (in number of minutes)')
     self.hb_delay = float(arg)
     self.heartbeat.change_interval(seconds=self.hb_delay)
     await ctx.send('Heartbeat interval changed.')
@@ -57,6 +61,10 @@ class HeartbeatHelper(commands.Cog):
   async def start_error(self, ctx, error):
     if isinstance(error, RuntimeError):
       await ctx.send('Heartbeat is already running!')
+
+  async def _check_sync(self):
+      response = await c.request('uk.pool.ntp.org')
+      print(ctime(response.tx_time))
 
 def setup(bot):
   bot.add_cog(HeartbeatHelper(bot))
