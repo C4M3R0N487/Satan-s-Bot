@@ -69,7 +69,7 @@ class Retriever(commands.Cog):
   @commands.command(name='sendgif')
   async def _send_nudes(self, ctx, target: discord.Member, query):
     numResults = 150
-
+    print(target)
     if query is None:
       await ctx.send('Please provide a search term, or multiple terms enclosed in quotes.')
       return
