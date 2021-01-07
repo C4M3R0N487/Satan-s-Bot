@@ -1,12 +1,10 @@
 from discord.ext import tasks, commands
-from time import ctime
+import time
 import requests
-import ntplib
 
 class HeartbeatHelper(commands.Cog):
   def __init__(self, bot):
     self.bot = bot
-    self.ntp = ntplib.NTPClient()
     self.hb_delay = 30.0
     self.heartbeat.start()
 
@@ -63,8 +61,11 @@ class HeartbeatHelper(commands.Cog):
       await ctx.send('Heartbeat is already running!')
 
   async def _check_sync(self):
-      response = self.ntp.request('uk.pool.ntp.org')
-      print(ctime(response.tx_time))
+    gmt = time.gmtime()
+    if gmt['tm_min'] not 0 or 30:
+      print('Time out of sync')
+    else:
+      print('Time in sync')
 
 def setup(bot):
   bot.add_cog(HeartbeatHelper(bot))
