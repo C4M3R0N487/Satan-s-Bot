@@ -1,0 +1,28 @@
+responses: {
+  bsonType: "object",
+  required: ["CommandNotFound"],
+  additionalProperties: true,
+  description: "responses to various errors and options",
+  properties:{
+    CommandNotFound: {
+      bsonType: "string",
+      description: "response when a command is not found",
+    },
+    OwnerError: {
+      bsonType: "string",
+      description: "response when the person executing the command is not a bot owner",
+    },
+    NoPGifsFound: {
+      bsonType: "string",
+      description: "response when a search for nsfw gifs returns no results",
+    },
+    NotAPGifChannel: {
+      bsonType: "string",
+      description: "response when a user attempts to search for nsfw gifs in a channel not flagged for it",
+    },
+    SearchArgs: {
+      bsonType: "string",
+      description: "response when a user omits search arguments for a search command",
+    },
+  },
+},

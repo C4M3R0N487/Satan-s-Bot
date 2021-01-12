@@ -16,7 +16,13 @@ intents = discord.Intents.default()
 #intents.members = True
 # Optional argument to pass in:
 #help_command=PrettyHelp(dm_help=True, sort_commands=False, active_time=30)
-bot = commands.Bot(command_prefix=commandChar, description=description, intents=intents)
+def prefix(bot, message):
+  guild_key = message.guild.id
+  if message.guild.id in bot.prefix_cache:
+    return bot.prefix_cache[guild_key]
+  else:
+    return bot.extensions.datahelper.get_prefix(guild_key)
+bot = commands.Bot(command_prefix=prefix, description=description, intents=intents)
 
 @bot.event
 async def on_ready():
