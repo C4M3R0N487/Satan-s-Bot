@@ -9,7 +9,7 @@ class HeartbeatHelper(commands.Cog):
     self.heartbeat.start()
 
   def cog_unload(self):
-    self.heartbeat.cancel
+    self.heartbeat.cancel()
 
   @tasks.loop(minutes=30.0)
   async def heartbeat(self):

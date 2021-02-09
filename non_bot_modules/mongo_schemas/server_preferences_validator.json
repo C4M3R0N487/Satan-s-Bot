@@ -1,0 +1,18 @@
+{
+  bsonType: "object",
+  required: ["prefix"],
+  properties: {
+    prefix: {
+      bsonType: "string",
+      description: "server-specific command prefix - required",
+    },
+    nsfwGifChannels: {
+      bsonType: "array",
+      minItems: 0,
+      items: {
+        bsonType: "long",
+        description: "the channel IDs of channels where the nsfw gif commands may be used",
+      },
+    },
+  },
+}

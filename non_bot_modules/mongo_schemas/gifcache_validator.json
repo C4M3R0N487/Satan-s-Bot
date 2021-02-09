@@ -1,0 +1,26 @@
+{
+  bsonType: "object",
+  required: ["term", "links"],
+  properties: {
+    term: {
+      bsonType: "string",
+      description: "the search term or terms as a string - required",
+    },
+    links: {
+      bsonType: "array",
+      minItems: 0,
+      items: {
+        bsonType: "object",
+        required: ["url"],
+        additionalProperties: true,
+        description: "links must contain at least a url",
+        properties: {
+          url: {
+            bsonType: "string",
+            description: "the url for the gif as a string - required",
+          },
+        },
+      },
+    },
+  },
+}
