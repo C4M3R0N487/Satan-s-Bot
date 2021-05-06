@@ -32,13 +32,15 @@ class DataHelper(commands.Cog):
 
   async def get_prefix(self, guild_key):
     cache = self.bot.prefix_cache
-    prefs = await self.db.server_preferences.find_one({'_id': {'$eq': guild_key}})
-    if prefs:
-      cache[guild_key] = prefs.prefix
-      return prefs.prefix
-    else:
-      cache[guild_key] = '%'
-      return '%'
+    #prefs = await self.db.server_preferences.find_one({'_id': {'$eq': guild_key}})
+    #if prefs:
+    #  cache[guild_key] = prefs.prefix
+    #  return prefs.prefix
+    #else:
+    #  cache[guild_key] = '%'
+    #  return '%'
+    cache[guild_key] = '%'
+    return cache[guild_key]
 
 def setup(bot):
   bot.add_cog(DataHelper(bot))
