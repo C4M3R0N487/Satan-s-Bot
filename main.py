@@ -17,11 +17,12 @@ intents = discord.Intents.default()
 # Optional argument to pass in:
 #help_command=PrettyHelp(dm_help=True, sort_commands=False, active_time=30)
 def prefix(bot, message):
-  guild_key = message.guild.id
-  if message.guild.id in bot.prefix_cache:
-    return bot.prefix_cache[guild_key]
-  else:
-    return bot.extensions.helpers.datahelper.get_prefix(guild_key)
+  #guild_key = message.guild.id
+  #if message.guild.id in bot.prefix_cache:
+  #  return bot.prefix_cache[guild_key]
+  #else:
+  #  return bot.extensions.helpers.datahelper.get_prefix(guild_key)
+  return commandChar
 bot = commands.Bot(command_prefix=prefix, description=description, intents=intents)
 
 @bot.event
