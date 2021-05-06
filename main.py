@@ -21,7 +21,7 @@ def prefix(bot, message):
   if message.guild.id in bot.prefix_cache:
     return bot.prefix_cache[guild_key]
   else:
-    return bot.extensions.datahelper.get_prefix(guild_key)
+    return bot.extensions.helpers.datahelper.get_prefix(guild_key)
 bot = commands.Bot(command_prefix=prefix, description=description, intents=intents)
 
 @bot.event
